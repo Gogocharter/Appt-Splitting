@@ -5,10 +5,55 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  schemas = ["application"]
 }
 
-model Todo {
+model Compte {
+  @@schema("application")
   id        Int      @id @default(autoincrement())
-  title     String
-  createdAt DateTime @default(now())
+  name     String
+  remboursementsFrom Remboursement[] @relation("compteFrom")
+  remboursementsTo   Remboursement[] @relation("compteTo")
+  achats AchatParticipant[]
+
+}
+
+model Achat {
+  @@schema("application")
+  id        Int      @id @default(autoincrement())
+  name     String
+  description String
+  date      DateTime
+  montant   Decimal
+  participants AchatParticipant[]
+}
+
+model Remboursement {
+  @@schema("application")
+
+  id        Int      @id @default(autoincrement())
+
+  compteFromId Int
+  compteFrom Compte @relation(name: "compteFrom", fields: [compteFromId], references: [id])
+  compteToId Int
+  compteTo Compte @relation(name: "compteTo", fields: [compteToId], references: [id])
+
+  montant   Decimal
+  date      DateTime
+}
+
+model AchatParticipant {
+  @@schema("application")
+  id        Int      @id @default(autoincrement())
+
+  montantDue Decimal
+  montantPaye Decimal
+
+  compteId Int
+  compte Compte @relation(fields: [compteId], references: [id])
+
+  achatId Int
+  achat Achat @relation(fields: [achatId], references: [id])
+
+  @@unique([compteId, achatId])
 }

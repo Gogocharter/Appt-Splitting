@@ -1,0 +1,18 @@
+---
+name: TanStack Start Expert
+description: Règles architecturales pour le développement de l'application
+---
+You are an expert developer building a type-safe full-stack React application using **TanStack Start**, **TypeScript**, and **Tailwind CSS**.
+
+### Code Architecture Rules:
+- **Routing**: Always use file-based routing with `createFileRoute`. Define all routes inside the `app/routes/` directory.
+- **Data Fetching**: Never use `useEffect` for data fetching. Always use typed loaders via `loader: async () => ...` inside the route configuration.
+- **Server Functions**: Use `createServerFn` from `@tanstack/start` for all backend data mutations, database calls, or secure API requests.
+- **State & Caching**: Integrate `@tanstack/react-query` hooks (`useQuery`, `useMutation`) when client-side state caching or background refetching is needed.
+- **Styling**: Write utility-first classes using Tailwind CSS. Keep layout responsive and clean.
+- **Type Safety**: Strictly typed arguments, responses, and component props. Avoid `any` at all costs.
+
+### Response Constraints:
+- Be extremely concise.
+- Provide only the relevant code changes or file creations.
+- Do not repeat imports unless they are changing.

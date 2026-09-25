@@ -10,4 +10,13 @@ dist-ssr
 .output
 .vinxi
 __unconfig*
-todos.json
+
+# Prisma generated client
+src/generated/prisma
+
+# Continue.dev local cache and index
+.continue/.index/
+.continue/cache/
+.continue/config.json.backup
+.continue/config.json
+.continue/manifest.json
